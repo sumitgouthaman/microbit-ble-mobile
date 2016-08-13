@@ -102,6 +102,12 @@
     <Reference Include="Xamarin.Forms.Platform">
       <HintPath>..\packages\Xamarin.Forms.2.0.1.6495\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
     </Reference>
+    <Reference Include="BluetoothLE.Core">
+      <HintPath>..\packages\XamarinBluetoothLE.1.0.0\lib\Xamarin.iOS10\BluetoothLE.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="BluetoothLE.iOS">
+      <HintPath>..\packages\XamarinBluetoothLE.1.0.0\lib\Xamarin.iOS10\BluetoothLE.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MicrobitBLE\MicrobitBLE.csproj">
