@@ -108,6 +108,12 @@
     <Reference Include="BluetoothLE.iOS">
       <HintPath>..\packages\XamarinBluetoothLE.1.0.0\lib\Xamarin.iOS10\BluetoothLE.iOS.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.BLE.Abstractions">
+      <HintPath>..\packages\Plugin.BLE.1.0.0\lib\Xamarin.iOS10\Plugin.BLE.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.BLE">
+      <HintPath>..\packages\Plugin.BLE.1.0.0\lib\Xamarin.iOS10\Plugin.BLE.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MicrobitBLE\MicrobitBLE.csproj">

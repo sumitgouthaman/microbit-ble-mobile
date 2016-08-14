@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		xmlns:local="clr-namespace:MicrobitBLE.Views"
+		x:Class="MicrobitBLE.Views.DeviceListPage"
+		Title="Detected Devices">
+	<StackLayout>
+		<StackLayout.Padding>
+			<OnPlatform x:TypeArguments="Thickness">
+				<OnPlatform.iOS>10,20,10,10</OnPlatform.iOS>
+				<OnPlatform.Android>10,10,10,10</OnPlatform.Android>
+			</OnPlatform>
+		</StackLayout.Padding>
+		<ListView
+				x:Name="DevicesList"
+				ItemsSource="{Binding DetectedDevices}">
+			<ListView.ItemTemplate>
+	        <DataTemplate>
+	        	<TextCell Text="{Binding Name}"
+	                     Detail="{Binding State}"/>
+	        </DataTemplate>
+	      </ListView.ItemTemplate>
+		</ListView>
+		<StackLayout
+				Orientation="Horizontal"
+				HorizontalOptions="End" >
+			<Label Text="Scanning for devices" VerticalTextAlignment="Center" />
+			<ActivityIndicator IsRunning="true" VerticalOptions="Center" />
+		</StackLayout>
+	</StackLayout>
+</ContentPage>

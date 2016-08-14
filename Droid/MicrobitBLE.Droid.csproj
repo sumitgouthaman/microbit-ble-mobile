@@ -77,6 +77,12 @@
     <Reference Include="BluetoothLE.Droid">
       <HintPath>..\packages\XamarinBluetoothLE.1.0.0\lib\MonoAndroid10\BluetoothLE.Droid.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.BLE.Abstractions">
+      <HintPath>..\packages\Plugin.BLE.1.0.0\lib\MonoAndroid\Plugin.BLE.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.BLE">
+      <HintPath>..\packages\Plugin.BLE.1.0.0\lib\MonoAndroid\Plugin.BLE.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MicrobitBLE\MicrobitBLE.csproj">

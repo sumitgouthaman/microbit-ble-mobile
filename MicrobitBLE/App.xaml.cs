@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
+using MicrobitBLE.Views;
 
 namespace MicrobitBLE
 {
@@ -8,7 +10,7 @@ namespace MicrobitBLE
 		{
 			InitializeComponent();
 
-			MainPage = new MicrobitBLEPage();
+			MainPage = new NavigationPage(new DeviceListPage());
 		}
 
 		protected override void OnStart()
