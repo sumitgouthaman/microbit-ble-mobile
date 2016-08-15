@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		x:Class="MicrobitBLE.Views.ServicePages.DeviceInformationPage"
+		Title="{Binding FriendlyName}" >
+	<ScrollView>
+		<StackLayout>
+			<StackLayout.Padding>
+				<OnPlatform x:TypeArguments="Thickness">
+					<OnPlatform.iOS>10,20,10,10</OnPlatform.iOS>
+					<OnPlatform.Android>10,10,10,10</OnPlatform.Android>
+				</OnPlatform>
+			</StackLayout.Padding>
+			<Label Text="Model Number" FontSize="Small" />
+			<Label Text="{Binding ModelNumber}" FontSize="Large" />
+			<Label Text="Serial Number" FontSize="Small" />
+			<Label Text="{Binding SerialNumber}" FontSize="Large" />
+			<Label Text="Hardware Revision" FontSize="Small" />
+			<Label Text="{Binding HardwareRevision}" FontSize="Large" />
+			<Label Text="Firmware Revision" FontSize="Small" />
+			<Label Text="{Binding FirmwareRevision}" FontSize="Large" />
+			<Label Text="Manufacturer Name" FontSize="Small" />
+			<Label Text="{Binding ManufacturerName}" FontSize="Large" />
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

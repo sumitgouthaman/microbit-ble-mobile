@@ -62,10 +62,10 @@ namespace MicrobitBLE.ViewModels
 				IList<IService> services = await _microbit.GetServicesAsync();
 				foreach (IService service in services)
 				{
-					Func<IMicrobitService> microbitServiceProvider = IdToServiceProviderMappingProvider.ServiceProvider(service.Id);
+					Func<IService, IMicrobitService> microbitServiceProvider = IdToServiceProviderMappingProvider.ServiceProvider(service.Id);
 					if (microbitServiceProvider != null)
 					{
-						DetectedServices.Add(microbitServiceProvider());
+						DetectedServices.Add(microbitServiceProvider(service));
 					}
 				}
 
@@ -121,16 +121,22 @@ namespace MicrobitBLE.ViewModels
 		{
 			IsBusy = true;
 			DetectedServices.Clear();
+			HashSet<Guid> seenServices = new HashSet<Guid>();
 			try
 			{
 				IList<IService> services = await _microbit.GetServicesAsync();
 				foreach (IService service in services)
 				{
-					Func<IMicrobitService> microbitServiceProvider = IdToServiceProviderMappingProvider.ServiceProvider(service.Id);
+					if (seenServices.Contains(service.Id))
+						continue;
+					
+					Func<IService, IMicrobitService> microbitServiceProvider = 
+						IdToServiceProviderMappingProvider.ServiceProvider(service.Id);
 					if (microbitServiceProvider != null)
 					{
-						DetectedServices.Add(microbitServiceProvider());
+						DetectedServices.Add(microbitServiceProvider(service));
 					}
+					seenServices.Add(service.Id);
 				}
 			}
 			catch (Exception e)

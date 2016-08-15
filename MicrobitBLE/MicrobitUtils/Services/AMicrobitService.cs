@@ -1,7 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
+using MicrobitBLE.Views.ServicePages;
+using Xamarin.Forms;
+
 namespace MicrobitBLE.MicrobitUtils.Services
 {
-	public class AMicrobitService : IMicrobitService
+	public abstract class AMicrobitService : IMicrobitService, INotifyPropertyChanged
 	{
 		public String FriendlyName { get; }
 
@@ -9,12 +13,16 @@ namespace MicrobitBLE.MicrobitUtils.Services
 
 		public string Description { get; }
 
+		public abstract ContentPage Page { get; }
+
 		public AMicrobitService(String friendlyName, Guid id, String descrption)
 		{
 			FriendlyName = friendlyName;
 			Id = id;
 			Description = descrption;
 		}
+
+		public abstract event PropertyChangedEventHandler PropertyChanged;
 	}
 }
 

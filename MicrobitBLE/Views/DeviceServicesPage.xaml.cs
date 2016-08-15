@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MicrobitBLE.MicrobitUtils.Services;
 using MicrobitBLE.ViewModels;
 using Plugin.BLE.Abstractions.Contracts;
 using Xamarin.Forms;
@@ -16,6 +17,18 @@ namespace MicrobitBLE.Views
 
 			vm = new DeviceServicesViewModel(device);
 			BindingContext = vm;
+
+			ServicesList.ItemSelected += ServicesList_ItemSelected;
+		}
+
+		async void ServicesList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+		{
+			if (e.SelectedItem == null)
+				return;
+
+			IMicrobitService service = e.SelectedItem as IMicrobitService;
+			await Navigation.PushAsync(service.Page);
+			((ListView)sender).SelectedItem = null;
 		}
 	}
 }
