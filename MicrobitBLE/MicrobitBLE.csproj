@@ -32,6 +32,9 @@
   <ItemGroup>
     <EmbeddedResource Include="App.xaml" />
     <EmbeddedResource Include="Views\DeviceListPage.xaml" />
+    <EmbeddedResource Include="Views\DeviceServicesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -42,6 +45,15 @@
       <DependentUpon>DeviceListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\DevicesViewModel.cs" />
+    <Compile Include="Views\DeviceServicesPage.xaml.cs">
+      <DependentUpon>DeviceServicesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\DeviceServicesViewModel.cs" />
+    <Compile Include="MicrobitUtils\Services\AMicrobitService.cs" />
+    <Compile Include="MicrobitUtils\Services\DeviceInformationService.cs" />
+    <Compile Include="MicrobitUtils\Services\IdToServiceProviderMappingProvider.cs" />
+    <Compile Include="MicrobitUtils\Services\IMicrobitService.cs" />
+    <Compile Include="MicrobitUtils\Services\ServiceIds.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -69,6 +81,8 @@
   <ItemGroup>
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
+    <Folder Include="MicrobitUtils\" />
+    <Folder Include="MicrobitUtils\Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.0.1.6495\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.0.1.6495\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

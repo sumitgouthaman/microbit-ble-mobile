@@ -1,4 +1,5 @@
 ﻿using MicrobitBLE.ViewModels;
+using Plugin.BLE.Abstractions.Contracts;
 using Xamarin.Forms;
 
 namespace MicrobitBLE.Views
@@ -6,21 +7,41 @@ namespace MicrobitBLE.Views
 	public partial class DeviceListPage : ContentPage
 	{
 		private DevicesViewModel vm;
+		private bool firstTime = true;
+
 		public DeviceListPage()
 		{
 			InitializeComponent();
 			vm = new DevicesViewModel();
 			BindingContext = vm;
+
+			DevicesList.ItemSelected += async (object sender, SelectedItemChangedEventArgs e) =>
+			{
+				if (e.SelectedItem == null)
+					return;
+				
+				IDevice selectedDevice = e.SelectedItem as IDevice;
+				await Navigation.PushAsync(new DeviceServicesPage(selectedDevice));
+				((ListView)sender).SelectedItem = null;
+			};
 		}
 
-		protected override async void OnAppearing()
+		protected override void OnAppearing()
 		{
-			await vm.StartScanning();
+			if (firstTime)
+			{
+				firstTime = false;
+				vm.StartScanning();
+			}
+			else
+			{
+				vm.UpdateList();
+			}
 		}
 
-		protected override async void OnDisappearing()
+		protected override void OnDisappearing()
 		{
-			await vm.StopScanning();
+			vm.StopScanning();
 		}
 	}
 }

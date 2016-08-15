@@ -54,4 +54,10 @@ Global
 		{313C6CCC-02F7-4450-964A-C084F006FEB2}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{313C6CCC-02F7-4450-964A-C084F006FEB2}.Debug|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = Hierarchical
+		$1.ResourceNamePolicy = FileFormatDefault
+	EndGlobalSection
 EndGlobal

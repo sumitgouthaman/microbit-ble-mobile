@@ -3,7 +3,7 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 		xmlns:local="clr-namespace:MicrobitBLE.Views"
 		x:Class="MicrobitBLE.Views.DeviceListPage"
-		Title="Detected Devices">
+		Title="Micro:bit BLE">
 	<StackLayout>
 		<StackLayout.Padding>
 			<OnPlatform x:TypeArguments="Thickness">
@@ -11,21 +11,29 @@
 				<OnPlatform.Android>10,10,10,10</OnPlatform.Android>
 			</OnPlatform>
 		</StackLayout.Padding>
+		<Label Text="Pick your Micro:bit" FontSize="Large" HorizontalTextAlignment="Center" />
 		<ListView
 				x:Name="DevicesList"
-				ItemsSource="{Binding DetectedDevices}">
+				ItemsSource="{Binding DetectedDevices}"
+				Header="Detected Devices" >
 			<ListView.ItemTemplate>
-	        <DataTemplate>
-	        	<TextCell Text="{Binding Name}"
-	                     Detail="{Binding State}"/>
-	        </DataTemplate>
-	      </ListView.ItemTemplate>
+			<DataTemplate>
+				<TextCell Text="{Binding Name}"
+							Detail="{Binding State}" />
+			</DataTemplate>
+			</ListView.ItemTemplate>
 		</ListView>
 		<StackLayout
-				Orientation="Horizontal"
-				HorizontalOptions="End" >
-			<Label Text="Scanning for devices" VerticalTextAlignment="Center" />
-			<ActivityIndicator IsRunning="true" VerticalOptions="Center" />
+				Orientation="Horizontal" >
+			<Button Text="Re-Scan" Command="{Binding ReScanCommand}" />
+			<Label Text="Scanning for devices"
+					VerticalTextAlignment="Center"
+					FontSize="Medium"
+					IsVisible="{Binding IsScanning}"
+				HorizontalOptions="EndAndExpand" />
+				<ActivityIndicator IsRunning="true"
+					VerticalOptions="Center"
+					IsVisible="{Binding IsScanning}" />
 		</StackLayout>
 	</StackLayout>
 </ContentPage>
