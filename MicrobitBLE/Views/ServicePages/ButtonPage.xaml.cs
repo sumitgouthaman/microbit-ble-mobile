@@ -5,11 +5,11 @@ using Xamarin.Forms;
 
 namespace MicrobitBLE.Views.ServicePages
 {
-	public partial class TemperaturePage : ContentPage
+	public partial class ButtonPage : ContentPage
 	{
-		private TemperatureService _service;
+		private ButtonService _service;
 
-		public TemperaturePage(TemperatureService service)
+		public ButtonPage(ButtonService service)
 		{
 			InitializeComponent();
 			_service = service;

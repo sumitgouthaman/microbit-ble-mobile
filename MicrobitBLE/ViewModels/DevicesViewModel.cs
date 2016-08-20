@@ -52,7 +52,7 @@ namespace MicrobitBLE.ViewModels
 				return;
 			}
 			DetectedDevices.Clear();
-			_adapter.DiscoveredDevices.Clear();
+			//_adapter.DiscoveredDevices.Clear();
 			foreach (IDevice _connectedDevice in _adapter.ConnectedDevices)
 			{
 				await _adapter.DisconnectDeviceAsync(_connectedDevice);

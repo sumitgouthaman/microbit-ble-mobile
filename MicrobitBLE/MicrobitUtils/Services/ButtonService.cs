@@ -3,55 +3,50 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using MicrobitBLE.MicrobitUtils.Helpers;
+using System.Threading.Tasks;
 using MicrobitBLE.Views.ServicePages;
 using Plugin.BLE.Abstractions.Contracts;
 using Xamarin.Forms;
 
 namespace MicrobitBLE.MicrobitUtils.Services
 {
-	public class TemperatureService: AMicrobitService
+	public class ButtonService : AMicrobitService
 	{
-		private static Guid TemperatureCharacteristicId = new Guid("E95D9250251D470AA062FA1922DFA9A8");
-		private static Guid TemperaturePeriodCharacteristicId = new Guid("E95D1B25251D470AA062FA1922DFA9A8");
+		private static Guid ButtonACharacteristicId = new Guid("E95DDA90251D470AA062FA1922DFA9A8");
+		private static Guid ButtonBCharacteristicId = new Guid("E95DDA91251D470AA062FA1922DFA9A8");
 
-		private int _temperature = int.MinValue;
-		public int Temperature
+		private ICharacteristic _aButtonCharacteristic = null;
+		private ICharacteristic _bButtonCharacteristic = null;
+
+		private int _aButton = -1;
+		public int AButton
 		{
 			get
 			{
-				return _temperature;
+				return _aButton;
 			}
 			set
 			{
-				_temperature = value;
+				_aButton = value;
 				OnPropertyChanged();
 			}
 		}
 
-		private int _temperaturePeriod = int.MinValue;
-		public int TemperaturePeriod
+		private int _bButton = -1;
+		public int BButton
 		{
 			get
 			{
-				return _temperaturePeriod;
+				return _bButton;
 			}
 			set
 			{
-				_temperaturePeriod = value;
+				_bButton = value;
 				OnPropertyChanged();
 			}
 		}
 
-		public override ContentPage Page
-		{
-			get
-			{
-				return new TemperaturePage(this);
-			}
-		}
-
-		private TemperatureService(String name, String description, Guid id, IService service)
+		private ButtonService(String name, String description, Guid id, IService service)
 			: base(name,
 				   description,
 				   id,
@@ -60,7 +55,15 @@ namespace MicrobitBLE.MicrobitUtils.Services
 
 		public static IMicrobitService GetInstance(String name, String description, Guid id, IService service)
 		{
-			return new TemperatureService(name, description, id, service);
+			return new ButtonService(name, description, id, service);
+		}
+
+		public override ContentPage Page
+		{
+			get
+			{
+				return new ButtonPage(this);
+			}
 		}
 
 		public async void LoadCharacteristics()
@@ -68,20 +71,23 @@ namespace MicrobitBLE.MicrobitUtils.Services
 			IEnumerable<ICharacteristic> characteristics = await ServiceInstance.GetCharacteristicsAsync();
 			foreach (ICharacteristic characteristic in characteristics)
 			{
-				if (characteristic.Id == TemperatureCharacteristicId)
+				if (characteristic.Id == ButtonACharacteristicId)
 				{
 					characteristic.ValueUpdated += (sender, e) =>
 					{
 						byte[] tempBytes = e.Characteristic.Value;
-						Temperature = (sbyte)(tempBytes.First());
+						AButton = (sbyte)(tempBytes.First());
 					};
 					MarkCharacteristicForUpdate(characteristic);
-				}
-				else if (characteristic.Id == TemperaturePeriodCharacteristicId)
+				} 
+				else if (characteristic.Id == ButtonBCharacteristicId)
 				{
-					byte[] val = await characteristic.ReadAsync();
-					int period = ConversionHelpers.ByteArrayToShort16BitLittleEndian(val);
-					TemperaturePeriod = period;
+					characteristic.ValueUpdated += (sender, e) =>
+					{
+						byte[] tempBytes = e.Characteristic.Value;
+						BButton = (sbyte)(tempBytes.First());
+					};
+					MarkCharacteristicForUpdate(characteristic);
 				}
 			}
 

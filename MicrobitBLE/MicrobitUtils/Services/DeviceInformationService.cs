@@ -11,8 +11,6 @@ namespace MicrobitBLE.MicrobitUtils.Services
 {
 	public class DeviceInformationService : AMicrobitService
 	{
-		private IService _service;
-
 		private enum CharacteristicField
 		{
 			ModelNumber,
@@ -36,12 +34,16 @@ namespace MicrobitBLE.MicrobitUtils.Services
 		public String FirmwareRevision { get; private set; } = "[Not Available]";
 		public String ManufacturerName { get; private set; } = "[Not Available]";
 
-		public DeviceInformationService(IService service)
-			: base("Device Information",
-			       ServiceIds.DeviceInformationServiceId,
-			      "Model number, Serial number, etc.")
+		private DeviceInformationService(String name, String description, Guid id, IService service)
+			: base(name,
+				   description,
+				   id,
+				   service)
+		{ }
+
+		public static IMicrobitService GetInstance(String name, String description, Guid id, IService service)
 		{
-			_service = service;
+			return new DeviceInformationService(name, description, id, service);
 		}
 
 		public override ContentPage Page
@@ -54,7 +56,7 @@ namespace MicrobitBLE.MicrobitUtils.Services
 
 		public async void LoadCharacteristics()
 		{
-			IEnumerable<ICharacteristic> characteristics = await _service.GetCharacteristicsAsync();
+			IEnumerable<ICharacteristic> characteristics = await ServiceInstance.GetCharacteristicsAsync();
 			foreach (ICharacteristic characteristic in characteristics)
 			{
 				CharacteristicField field;

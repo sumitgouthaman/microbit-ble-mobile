@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-		x:Class="MicrobitBLE.Views.ServicePages.TemperaturePage"
+		x:Class="MicrobitBLE.Views.ServicePages.ButtonPage"
 		xmlns:c="clr-namespace:MicrobitBLE.MicrobitUtils.Helpers"
 		Title="{Binding FriendlyName}" >
 	<ContentPage.Resources>
 		<ResourceDictionary>
-			<c:IntToStringConverter x:Key="IntToStringConverter" />
+			<c:ButtonStateToStringConverter x:Key="ButtonStateToStringConverter" />
 		</ResourceDictionary>
 	</ContentPage.Resources>
 	<ScrollView>
@@ -17,10 +17,10 @@
 					<OnPlatform.Android>10,10,10,10</OnPlatform.Android>
 				</OnPlatform>
 			</StackLayout.Padding>
-			<Label Text="Current Temperature" FontSize="Small" />
-			<Label Text="{Binding Temperature, Converter={StaticResource IntToStringConverter}, StringFormat='{0} °C'}" FontSize="Large" />
-			<Label Text="Updated every" FontSize="Small" />
-			<Label Text="{Binding TemperaturePeriod, Converter={StaticResource IntToStringConverter}, StringFormat='{0} milliseconds'}" FontSize="Large" />
+			<Label Text="Button A" FontSize="Small" />
+			<Label Text="{Binding AButton, Converter={StaticResource ButtonStateToStringConverter}, StringFormat='{0}'}" FontSize="Large" />
+			<Label Text="Button B" FontSize="Small" />
+			<Label Text="{Binding BButton, Converter={StaticResource ButtonStateToStringConverter}, StringFormat='{0}'}" FontSize="Large" />
 		</StackLayout>
 	</ScrollView>
 </ContentPage>

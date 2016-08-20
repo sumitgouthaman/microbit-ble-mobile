@@ -6,20 +6,58 @@ namespace MicrobitBLE.MicrobitUtils.Services
 {
 	public static class IdToServiceProviderMappingProvider
 	{
-		private static Dictionary<Guid, Func<IService, IMicrobitService>> _mapping = new Dictionary<Guid, Func<IService, IMicrobitService>>()
+		private static Dictionary<Guid, Func<IService, IMicrobitServiceProvider>> _mapping = 
+			new Dictionary<Guid, Func<IService, IMicrobitServiceProvider>>()
 		{
-			{ServiceIds.DeviceInformationServiceId, (service) => new DeviceInformationService(service)},
-			{ServiceIds.TemperatureServiceId, (service) => new TemperatureService(service)}
+			// Device Information Service
+			{ServiceIds.DeviceInformationServiceId, (service) => new MicrobitServiceProvider(
+				"Device Information Service",
+				"Device name, manufacturer, etc.",
+				ServiceIds.DeviceInformationServiceId,
+				service,
+				DeviceInformationService.GetInstance)},
+
+			// Temperature Service
+			{ServiceIds.TemperatureServiceId, (service) => new MicrobitServiceProvider(
+				"Temperature Service",
+				"Temperature sensor data",
+				ServiceIds.TemperatureServiceId,
+				service,
+				TemperatureService.GetInstance)},
+
+			// Accelerometer Service
+			{ServiceIds.AccelerometerServiceId, (service) => new MicrobitServiceProvider(
+				"Accelerometer Service",
+				"X, Y, Z axis acceleration values",
+				ServiceIds.AccelerometerServiceId,
+				service,
+				AccelerometerService.GetInstance)},
+
+			// Button Service
+			{ServiceIds.ButtonServiceId, (service) => new MicrobitServiceProvider(
+				"Button Service",
+				"A / B button states",
+				ServiceIds.ButtonServiceId,
+				service,
+				ButtonService.GetInstance)},
+
+			// Magnetometer Service
+			{ServiceIds.MagnetometerServiceId, (service) => new MicrobitServiceProvider(
+				"Magnetometer Service",
+				"Compass Data",
+				ServiceIds.MagnetometerServiceId,
+				service,
+				MagnetometerService.GetInstance)},
 		};
 
-		public static Func<IService, IMicrobitService> ServiceProvider(Guid serviceGuid)
+		public static IMicrobitServiceProvider ServiceProvider(IService serviceInstance)
 		{
-			Func<IService, IMicrobitService> provider;
-			if (!_mapping.TryGetValue(serviceGuid, out provider))
+			Func<IService, IMicrobitServiceProvider> provider;
+			if (!_mapping.TryGetValue(serviceInstance.Id, out provider))
 			{
 				return null;
 			}
-			return provider;
+			return provider(serviceInstance);
 		}
 	}
 }

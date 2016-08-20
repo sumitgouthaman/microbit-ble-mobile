@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
 using MicrobitBLE.Views.ServicePages;
+using Plugin.BLE.Abstractions.Contracts;
 using Xamarin.Forms;
 
 namespace MicrobitBLE.MicrobitUtils.Services
@@ -13,13 +17,51 @@ namespace MicrobitBLE.MicrobitUtils.Services
 
 		public string Description { get; }
 
+		public IService ServiceInstance { get; }
+
 		public abstract ContentPage Page { get; }
 
-		public AMicrobitService(String friendlyName, Guid id, String descrption)
+		private IList<ICharacteristic> CharacteristicsToUpdate;
+		private HashSet<Guid> SeenCharacteristics;
+
+		public AMicrobitService(String friendlyName, String description, Guid id, IService service)
 		{
 			FriendlyName = friendlyName;
 			Id = id;
-			Description = descrption;
+			Description = description;
+			ServiceInstance = service;
+			CharacteristicsToUpdate = new List<ICharacteristic>();
+			SeenCharacteristics = new HashSet<Guid>();
+		}
+
+		public void MarkCharacteristicForUpdate(ICharacteristic characteristic)
+		{
+			if (characteristic == null || SeenCharacteristics.Contains(characteristic.Id))
+				return;
+
+			CharacteristicsToUpdate.Add(characteristic);
+		}
+
+		public async void StartUpdates()
+		{
+			foreach (ICharacteristic characteristic in CharacteristicsToUpdate.ToList())
+			{
+				characteristic.StartUpdates();
+
+				// This is due to a bug in the BLE library: https://github.com/xabre/xamarin-bluetooth-le/issues/64
+				await Task.Delay(300);
+			}
+		}
+
+		public async void StopUpdates()
+		{
+			foreach (ICharacteristic characteristic in CharacteristicsToUpdate)
+			{
+				characteristic.StopUpdates();
+
+				// This is due to a bug in the BLE library: https://github.com/xabre/xamarin-bluetooth-le/issues/64
+				//await Task.Delay(500);
+			}
 		}
 
 		public abstract event PropertyChangedEventHandler PropertyChanged;

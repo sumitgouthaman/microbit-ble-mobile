@@ -19,7 +19,7 @@ namespace MicrobitBLE.ViewModels
 		private IBluetoothLE _bluetoothLe;
 		private IAdapter _adapter;
 
-		public ObservableCollection<IMicrobitService> DetectedServices { get; private set; }
+		public ObservableCollection<IMicrobitServiceProvider> DetectedServices { get; private set; }
 
 		public String DeviceName => _microbit.Name;
 		public Guid DeviceId => _microbit.Id;
@@ -62,17 +62,17 @@ namespace MicrobitBLE.ViewModels
 				IList<IService> services = await _microbit.GetServicesAsync();
 				foreach (IService service in services)
 				{
-					Func<IService, IMicrobitService> microbitServiceProvider = IdToServiceProviderMappingProvider.ServiceProvider(service.Id);
+					IMicrobitServiceProvider microbitServiceProvider = IdToServiceProviderMappingProvider.ServiceProvider(service);
 					if (microbitServiceProvider != null)
 					{
-						DetectedServices.Add(microbitServiceProvider(service));
+						DetectedServices.Add(microbitServiceProvider);
 					}
 				}
 
 			}, () => !IsBusy
 			);
 
-			DetectedServices = new ObservableCollection<IMicrobitService>();
+			DetectedServices = new ObservableCollection<IMicrobitServiceProvider>();
 		}
 
 		public async void Connect()
@@ -121,22 +121,17 @@ namespace MicrobitBLE.ViewModels
 		{
 			IsBusy = true;
 			DetectedServices.Clear();
-			HashSet<Guid> seenServices = new HashSet<Guid>();
 			try
 			{
 				IList<IService> services = await _microbit.GetServicesAsync();
 				foreach (IService service in services)
 				{
-					if (seenServices.Contains(service.Id))
-						continue;
-					
-					Func<IService, IMicrobitService> microbitServiceProvider = 
-						IdToServiceProviderMappingProvider.ServiceProvider(service.Id);
+					IMicrobitServiceProvider microbitServiceProvider = 
+						IdToServiceProviderMappingProvider.ServiceProvider(service);
 					if (microbitServiceProvider != null)
 					{
-						DetectedServices.Add(microbitServiceProvider(service));
+						DetectedServices.Add(microbitServiceProvider);
 					}
-					seenServices.Add(service.Id);
 				}
 			}
 			catch (Exception e)

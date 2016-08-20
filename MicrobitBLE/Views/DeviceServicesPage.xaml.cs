@@ -26,8 +26,8 @@ namespace MicrobitBLE.Views
 			if (e.SelectedItem == null)
 				return;
 
-			IMicrobitService service = e.SelectedItem as IMicrobitService;
-			await Navigation.PushAsync(service.Page);
+			IMicrobitServiceProvider serviceProvider = e.SelectedItem as IMicrobitServiceProvider;
+			await Navigation.PushAsync(serviceProvider.GetServiceInstance().Page);
 			((ListView)sender).SelectedItem = null;
 		}
 	}
