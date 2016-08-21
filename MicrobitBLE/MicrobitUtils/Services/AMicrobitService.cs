@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using MicrobitBLE.Views.ServicePages;
 using Plugin.BLE.Abstractions.Contracts;
@@ -64,7 +65,16 @@ namespace MicrobitBLE.MicrobitUtils.Services
 			}
 		}
 
-		public abstract event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void OnPropertyChanged([CallerMemberName] string name = null)
+		{
+			var changed = PropertyChanged;
+
+			if (changed == null)
+				return;
+
+			changed.Invoke(this, new PropertyChangedEventArgs(name));
+		}
 	}
 }
 

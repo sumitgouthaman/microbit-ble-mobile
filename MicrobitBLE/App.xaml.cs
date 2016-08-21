@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using MicrobitBLE.Views;
+using MicrobitBLE.Views.ServicePages;
 
 namespace MicrobitBLE
 {

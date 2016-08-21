@@ -48,6 +48,14 @@ namespace MicrobitBLE.MicrobitUtils.Services
 				ServiceIds.MagnetometerServiceId,
 				service,
 				MagnetometerService.GetInstance)},
+			
+			// Led Service
+			{ServiceIds.LedServiceId, (service) => new MicrobitServiceProvider(
+				"LED Service",
+				"Show text on LED Display",
+				ServiceIds.LedServiceId,
+				service,
+				LedService.GetInstance)},
 		};
 
 		public static IMicrobitServiceProvider ServiceProvider(IService serviceInstance)

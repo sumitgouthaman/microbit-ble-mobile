@@ -152,17 +152,6 @@ namespace MicrobitBLE.MicrobitUtils.Services
 
 			StartUpdates();
 		}
-
-		public override event PropertyChangedEventHandler PropertyChanged;
-		void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			var changed = PropertyChanged;
-
-			if (changed == null)
-				return;
-
-			changed.Invoke(this, new PropertyChangedEventArgs(name));
-		}
 	}
 }
 

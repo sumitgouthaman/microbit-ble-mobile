@@ -8,6 +8,7 @@ namespace MicrobitBLE.MicrobitUtils.Services
 		public static Guid AccelerometerServiceId = new Guid("E95D0753251D470AA062FA1922DFA9A8");
 		public static Guid ButtonServiceId = new Guid("E95D9882251D470AA062FA1922DFA9A8");
 		public static Guid MagnetometerServiceId = new Guid("E95DF2D8251D470AA062FA1922DFA9A8");
+		public static Guid LedServiceId = new Guid("E95DD91D251D470AA062FA1922DFA9A8");
 	}
 }
 

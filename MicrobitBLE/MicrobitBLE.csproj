@@ -50,6 +50,9 @@
     <EmbeddedResource Include="Views\ServicePages\MagnetometerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ServicePages\LEDPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -94,6 +97,10 @@
     <Compile Include="Views\ServicePages\MagnetometerPage.xaml.cs">
       <DependentUpon>MagnetometerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ServicePages\LEDPage.xaml.cs">
+      <DependentUpon>LEDPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MicrobitUtils\Services\LedService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="BluetoothLE.Core">

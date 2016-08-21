@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		x:Class="MicrobitBLE.Views.ServicePages.LEDPage"
+		Title="{Binding FriendlyName}">
+	<ScrollView>
+		<StackLayout>
+			<StackLayout.Padding>
+				<OnPlatform x:TypeArguments="Thickness">
+					<OnPlatform.iOS>10,20,10,10</OnPlatform.iOS>
+					<OnPlatform.Android>10,10,10,10</OnPlatform.Android>
+				</OnPlatform>
+			</StackLayout.Padding>
+			<StackLayout IsVisible="{Binding LedTextCharacteristicAvailable}">
+				<Label Text="Send text to Micro:bit" FontSize="Small" />
+				<StackLayout Orientation="Horizontal">
+					<Entry x:Name="TextEntry" 
+							Placeholder="Enter text to display"
+							Keyboard="Text"
+							HorizontalOptions="FillAndExpand"
+							Text="{Binding TextToSend, Mode=TwoWay}" />
+					<Button Text="Display" Command="{Binding SendTextCommand}" />
+				</StackLayout>
+			</StackLayout>
+			<!--<Grid x:Name="LEDGrid" RowSpacing="1" ColumnSpacing="1">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Button Text="{Binding LedStatus[0,0], StringFormat='-{0}-'}" Grid.Row="0" Grid.Column="0" />
+				<Button Text="{Binding Test}" Grid.Row="0" Grid.Column="1" />
+				<Button Text="" Grid.Row="0" Grid.Column="2" />
+				<Button Text="" Grid.Row="0" Grid.Column="3" />
+				<Button Text="" Grid.Row="0" Grid.Column="4" />
+				<Button Text="" Grid.Row="1" Grid.Column="0" />
+				<Button Text="" Grid.Row="1" Grid.Column="1" />
+				<Button Text="" Grid.Row="1" Grid.Column="2" />
+				<Button Text="" Grid.Row="1" Grid.Column="3" />
+				<Button Text="" Grid.Row="1" Grid.Column="4" />
+				<Button Text="" Grid.Row="2" Grid.Column="0" />
+				<Button Text="" Grid.Row="2" Grid.Column="1" />
+				<Button Text="" Grid.Row="2" Grid.Column="2" />
+				<Button Text="" Grid.Row="2" Grid.Column="3" />
+				<Button Text="" Grid.Row="2" Grid.Column="4" />
+				<Button Text="" Grid.Row="3" Grid.Column="0" />
+				<Button Text="" Grid.Row="3" Grid.Column="1" />
+				<Button Text="" Grid.Row="3" Grid.Column="2" />
+				<Button Text="" Grid.Row="3" Grid.Column="3" />
+				<Button Text="" Grid.Row="3" Grid.Column="4" />
+				<Button Text="" Grid.Row="4" Grid.Column="0" />
+				<Button Text="" Grid.Row="4" Grid.Column="1" />
+				<Button Text="" Grid.Row="4" Grid.Column="2" />
+				<Button Text="" Grid.Row="4" Grid.Column="3" />
+				<Button Text="" Grid.Row="4" Grid.Column="4" />
+			</Grid>-->
+		</StackLayout>
+	</ScrollView>
+</ContentPage>
