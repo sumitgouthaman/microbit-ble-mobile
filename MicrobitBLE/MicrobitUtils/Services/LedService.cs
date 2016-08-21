@@ -20,6 +20,7 @@ namespace MicrobitBLE.MicrobitUtils.Services
 		private static Guid ScrollingDelayCharacteristicId = new Guid("E95D0D2D251D470AA062FA1922DFA9A8");
 
 		private ICharacteristic _ledTextCharacteristic = null;
+		private ICharacteristic _ledMatrixCharacteristic = null;
 
 		private bool _ledTextCharacteristicAvailable;
 		public bool LedTextCharacteristicAvailable
@@ -31,6 +32,20 @@ namespace MicrobitBLE.MicrobitUtils.Services
 			set
 			{
 				_ledTextCharacteristicAvailable = value;
+				OnPropertyChanged();
+			}
+		}
+
+		private bool _ledMatrixCharacteristicAvailable;
+		public bool LedMatrixCharacteristicAvailable
+		{
+			get
+			{
+				return _ledMatrixCharacteristicAvailable;
+			}
+			set
+			{
+				_ledMatrixCharacteristicAvailable = value;
 				OnPropertyChanged();
 			}
 		}
@@ -72,6 +87,11 @@ namespace MicrobitBLE.MicrobitUtils.Services
 					_ledTextCharacteristic = characteristic;
 					LedTextCharacteristicAvailable = true;
 				}
+				else if (characteristic.Id == LedMatrixStateCharacteristicId)
+				{
+					_ledMatrixCharacteristic = characteristic;
+					LedMatrixCharacteristicAvailable = true;
+				}
 			}
 		}
 
@@ -82,6 +102,23 @@ namespace MicrobitBLE.MicrobitUtils.Services
 			{
 				byte[] rawBytes = Encoding.UTF8.GetBytes(TextToSend).Take(20).ToArray();
 				await _ledTextCharacteristic.WriteAsync(rawBytes);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+		}
+
+		public async Task FlipLed(Tuple<int, int> coordinate)
+		{
+			if (IsBusy)
+				return;
+			IsBusy = true;
+			try
+			{
+				byte[] matrix = await _ledMatrixCharacteristic.ReadAsync();
+				matrix[coordinate.Item1] ^= (byte)(16 >> coordinate.Item2); // 16 = 00010000 in binary
+				await _ledMatrixCharacteristic.WriteAsync(matrix);
 			}
 			finally
 			{

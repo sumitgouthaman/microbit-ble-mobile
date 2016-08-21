@@ -14,6 +14,20 @@ namespace MicrobitBLE.Views.ServicePages
 			InitializeComponent();
 			_service = service;
 			BindingContext = _service;
+
+			for (int i = 0; i < 5; i++)
+			{
+				for (int j = 0; j < 5; j++)
+				{
+					Button b = new Button();
+					Tuple<int, int> coordinate = Tuple.Create(i, j);
+					b.Clicked += async (sender, e) =>
+					{
+						await _service.FlipLed(coordinate);
+					};
+					LedGrid.Children.Add(b, j, i);
+				}
+			}
 		}
 
 		protected override void OnAppearing()

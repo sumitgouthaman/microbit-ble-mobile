@@ -22,47 +22,25 @@
 					<Button Text="Display" Command="{Binding SendTextCommand}" />
 				</StackLayout>
 			</StackLayout>
-			<!--<Grid x:Name="LEDGrid" RowSpacing="1" ColumnSpacing="1">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="*" />
-					<RowDefinition Height="*" />
-					<RowDefinition Height="*" />
-					<RowDefinition Height="*" />
-					<RowDefinition Height="*" />
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="*" />
-				</Grid.ColumnDefinitions>
-				<Button Text="{Binding LedStatus[0,0], StringFormat='-{0}-'}" Grid.Row="0" Grid.Column="0" />
-				<Button Text="{Binding Test}" Grid.Row="0" Grid.Column="1" />
-				<Button Text="" Grid.Row="0" Grid.Column="2" />
-				<Button Text="" Grid.Row="0" Grid.Column="3" />
-				<Button Text="" Grid.Row="0" Grid.Column="4" />
-				<Button Text="" Grid.Row="1" Grid.Column="0" />
-				<Button Text="" Grid.Row="1" Grid.Column="1" />
-				<Button Text="" Grid.Row="1" Grid.Column="2" />
-				<Button Text="" Grid.Row="1" Grid.Column="3" />
-				<Button Text="" Grid.Row="1" Grid.Column="4" />
-				<Button Text="" Grid.Row="2" Grid.Column="0" />
-				<Button Text="" Grid.Row="2" Grid.Column="1" />
-				<Button Text="" Grid.Row="2" Grid.Column="2" />
-				<Button Text="" Grid.Row="2" Grid.Column="3" />
-				<Button Text="" Grid.Row="2" Grid.Column="4" />
-				<Button Text="" Grid.Row="3" Grid.Column="0" />
-				<Button Text="" Grid.Row="3" Grid.Column="1" />
-				<Button Text="" Grid.Row="3" Grid.Column="2" />
-				<Button Text="" Grid.Row="3" Grid.Column="3" />
-				<Button Text="" Grid.Row="3" Grid.Column="4" />
-				<Button Text="" Grid.Row="4" Grid.Column="0" />
-				<Button Text="" Grid.Row="4" Grid.Column="1" />
-				<Button Text="" Grid.Row="4" Grid.Column="2" />
-				<Button Text="" Grid.Row="4" Grid.Column="3" />
-				<Button Text="" Grid.Row="4" Grid.Column="4" />
-			</Grid>-->
+			<StackLayout IsVisible="{Binding LedMatrixCharacteristicAvailable}">
+				<Label Text="Flip individual LEDs" FontSize="Small" />
+				<Grid x:Name="LedGrid" RowSpacing="1" ColumnSpacing="1">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+				</Grid>
+			</StackLayout>
 		</StackLayout>
 	</ScrollView>
 </ContentPage>
