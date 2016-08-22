@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using MicrobitBLE.MicrobitUtils.Services;
+﻿using MicrobitBLE.MicrobitUtils.Services;
 using Xamarin.Forms;
 
 namespace MicrobitBLE.Views.ServicePages

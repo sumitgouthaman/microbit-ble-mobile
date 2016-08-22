@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using MicrobitBLE.MicrobitUtils.Services;
-using Plugin.BLE.Abstractions.Contracts;
 using Xamarin.Forms;
 
 namespace MicrobitBLE.Views.ServicePages

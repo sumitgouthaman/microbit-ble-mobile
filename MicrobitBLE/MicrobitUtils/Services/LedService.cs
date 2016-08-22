@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using MicrobitBLE.MicrobitUtils.Helpers;
 using MicrobitBLE.Views.ServicePages;
 using Plugin.BLE.Abstractions.Contracts;
 using Xamarin.Forms;
@@ -97,6 +93,9 @@ namespace MicrobitBLE.MicrobitUtils.Services
 
 		public async Task SendText()
 		{
+			if (String.IsNullOrEmpty(TextToSend))
+				return;
+			
 			IsBusy = true;
 			try
 			{

@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using MicrobitBLE.Views.ServicePages;
 using Plugin.BLE.Abstractions.Contracts;
 using Xamarin.Forms;
 

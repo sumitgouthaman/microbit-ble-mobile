@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using MicrobitBLE.MicrobitUtils.Helpers;
 using MicrobitBLE.Views.ServicePages;
 using Plugin.BLE.Abstractions.Contracts;

@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace MicrobitBLE.MicrobitUtils.Helpers
 {
 	public static class ConversionHelpers
