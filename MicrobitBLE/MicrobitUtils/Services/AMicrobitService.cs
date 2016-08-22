@@ -49,7 +49,7 @@ namespace MicrobitBLE.MicrobitUtils.Services
 				characteristic.StartUpdates();
 
 				// This is due to a bug in the BLE library: https://github.com/xabre/xamarin-bluetooth-le/issues/64
-				await Task.Delay(300);
+				await Task.Delay(500);
 			}
 		}
 
