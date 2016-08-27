@@ -53,6 +53,9 @@
     <EmbeddedResource Include="Views\ServicePages\LEDPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\InstructionsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -101,6 +104,9 @@
       <DependentUpon>LEDPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MicrobitUtils\Services\LedService.cs" />
+    <Compile Include="Views\InstructionsPage.xaml.cs">
+      <DependentUpon>InstructionsPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="BluetoothLE.Core">

@@ -24,6 +24,11 @@ namespace MicrobitBLE.Views
 				await Navigation.PushAsync(new DeviceServicesPage(selectedDevice));
 				((ListView)sender).SelectedItem = null;
 			};
+
+			InstructionsButton.Clicked += (sender, e) =>
+			{
+				Navigation.PushAsync(new InstructionsPage());
+			};
 		}
 
 		protected override void OnAppearing()

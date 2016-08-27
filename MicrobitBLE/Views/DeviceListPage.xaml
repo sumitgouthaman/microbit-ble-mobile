@@ -36,4 +36,7 @@
 					IsVisible="{Binding IsScanning}" />
 		</StackLayout>
 	</StackLayout>
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Name="Instructions" Order="Primary" Priority="0" x:Name="InstructionsButton" />
+	</ContentPage.ToolbarItems>
 </ContentPage>
