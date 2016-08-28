@@ -3,7 +3,7 @@ Micro:bit BLE Xamarin
 A sample Xamarin app (Android/iOS) that demonstrates connecting with a BBC
 Micro:bit and fetching sensor data.  
 
-### [Play store listing](//todo)
+### [Play store listing](https://play.google.com/store/apps/details?id=com.sumitgouthaman.microbitble)
 
 ## What is the BBC Micro:bit
 From [Wikipedia](https://en.wikipedia.org/wiki/Micro_Bit):
